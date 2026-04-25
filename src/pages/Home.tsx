@@ -44,14 +44,18 @@ const SERVICES = [
     title: "Job Portal",
     desc: "AI-powered matching engine that connects top talent with the right opportunities at scale.",
     link: "/services/job-portal",
-    icon: <Briefcase size={40} strokeWidth={1.5} />,
-    bg: "bg-brand-navy",
-    textClass: "text-white",
-    descClass: "text-white/60",
-    accentClass: "text-brand-blue",
-    btnClass: "bg-brand-orange text-white hover:bg-[#d06515]",
-    dotClass: "bg-white/30",
-    activeDotClass: "bg-white",
+    icon: <Briefcase size={52} strokeWidth={1.2} />,
+    stackBg: "bg-white",
+    stackBorder: "border-t border-[#E5E9EE]",
+    titleClass: "text-brand-navy",
+    descClass: "text-bp-muted",
+    eyebrowClass: "text-brand-orange",
+    numClass: "text-brand-navy/[0.045]",
+    iconBg: "bg-brand-navy/5",
+    iconClass: "text-brand-orange",
+    btnClass: "bg-brand-navy text-white hover:bg-brand-orange",
+    dotActive: "bg-brand-navy",
+    dotInactive: "bg-brand-navy/20",
   },
   {
     number: "02",
@@ -59,14 +63,18 @@ const SERVICES = [
     title: "Recruitment",
     desc: "Full-cycle recruitment services with deep domain expertise and a pre-vetted talent network.",
     link: "/services/recruitment",
-    icon: <Users size={40} strokeWidth={1.5} />,
-    bg: "bg-[#FDF5EE]",
-    textClass: "text-brand-navy",
+    icon: <Users size={52} strokeWidth={1.2} />,
+    stackBg: "bg-[#FEF7EE]",
+    stackBorder: "border-t border-[#F5E6D0]",
+    titleClass: "text-brand-navy",
     descClass: "text-bp-muted",
-    accentClass: "text-brand-orange",
-    btnClass: "border-2 border-brand-orange text-brand-orange hover:bg-brand-navy hover:text-white hover:border-brand-navy",
-    dotClass: "bg-brand-navy/20",
-    activeDotClass: "bg-brand-navy",
+    eyebrowClass: "text-brand-orange",
+    numClass: "text-brand-navy/[0.045]",
+    iconBg: "bg-brand-orange/8",
+    iconClass: "text-brand-orange",
+    btnClass: "bg-brand-orange text-white hover:bg-[#d06515]",
+    dotActive: "bg-brand-navy",
+    dotInactive: "bg-brand-navy/20",
   },
   {
     number: "03",
@@ -74,14 +82,18 @@ const SERVICES = [
     title: "Training",
     desc: "Industry-aligned programs that accelerate careers and bridge the education-employment gap.",
     link: "/services/training",
-    icon: <GraduationCap size={40} strokeWidth={1.5} />,
-    bg: "bg-[#F2F8EC]",
-    textClass: "text-brand-navy",
+    icon: <GraduationCap size={52} strokeWidth={1.2} />,
+    stackBg: "bg-[#F2F9EC]",
+    stackBorder: "border-t border-[#D8EEC4]",
+    titleClass: "text-brand-navy",
     descClass: "text-bp-muted",
-    accentClass: "text-brand-green",
-    btnClass: "border-2 border-brand-green text-brand-green hover:bg-brand-navy hover:text-white hover:border-brand-navy",
-    dotClass: "bg-brand-navy/20",
-    activeDotClass: "bg-brand-navy",
+    eyebrowClass: "text-brand-green",
+    numClass: "text-brand-navy/[0.045]",
+    iconBg: "bg-brand-green/10",
+    iconClass: "text-brand-green",
+    btnClass: "bg-brand-green text-white hover:bg-[#6aa32a]",
+    dotActive: "bg-brand-navy",
+    dotInactive: "bg-brand-navy/20",
   },
   {
     number: "04",
@@ -89,14 +101,18 @@ const SERVICES = [
     title: "Industries",
     desc: "Sector expertise across finance, technology, healthcare, manufacturing, and beyond.",
     link: "/services/industries",
-    icon: <Building2 size={40} strokeWidth={1.5} />,
-    bg: "bg-[#EEF4FB]",
-    textClass: "text-brand-navy",
-    descClass: "text-bp-muted",
-    accentClass: "text-brand-blue",
-    btnClass: "border-2 border-brand-blue text-brand-blue hover:bg-brand-navy hover:text-white hover:border-brand-navy",
-    dotClass: "bg-brand-navy/20",
-    activeDotClass: "bg-brand-navy",
+    icon: <Building2 size={52} strokeWidth={1.2} />,
+    stackBg: "bg-brand-navy",
+    stackBorder: "border-t border-brand-navy",
+    titleClass: "text-white",
+    descClass: "text-white/55",
+    eyebrowClass: "text-brand-blue",
+    numClass: "text-white/[0.05]",
+    iconBg: "bg-white/8",
+    iconClass: "text-brand-blue",
+    btnClass: "bg-white text-brand-navy hover:bg-brand-orange hover:text-white",
+    dotActive: "bg-white",
+    dotInactive: "bg-white/25",
   },
 ];
 
@@ -159,7 +175,6 @@ export default function Home() {
 
   // ── Refs ─────────────────────────────────────────────────────────────────
   const containerRef = useRef<HTMLDivElement>(null);
-  const servicesOuterRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
   // ── Hero scroll ───────────────────────────────────────────────────────────
@@ -177,13 +192,6 @@ export default function Home() {
   const baseY = useTransform(scrollYProgress, [0.7, 1], ["0px", "200px"]);
   const dashboardOpacity = useTransform(scrollYProgress, [0.7, 0.85], [1, 0]);
   const screenContentOpacity = useTransform(scrollYProgress, [0.82, 0.95], [0, 1]);
-
-  // ── Services scroll ───────────────────────────────────────────────────────
-  const { scrollYProgress: servicesProgress } = useScroll({
-    target: servicesOuterRef,
-    offset: ["start start", "end end"],
-  });
-  const servicesX = useTransform(servicesProgress, [0, 1], ["0%", "-75%"]);
 
   // ── Timeline scroll ───────────────────────────────────────────────────────
   const { scrollYProgress: timelineProgress } = useScroll({
@@ -357,13 +365,44 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* LID BACK (logo) */}
+                {/* LID BACK — brushed aluminium + engraved logo */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-b from-bp-surface to-bp-bg rounded-t-3xl border border-[#141619]/15 flex items-center justify-center"
-                  style={{ transform: "rotateX(180deg)", backfaceVisibility: "hidden" }}
+                  className="absolute inset-0 rounded-t-3xl overflow-hidden flex items-center justify-center"
+                  style={{
+                    transform: "rotateX(180deg)",
+                    backfaceVisibility: "hidden",
+                    background:
+                      "linear-gradient(110deg,#b2b8be 0%,#d4dade 14%,#bfc5ca 28%,#dde1e5 42%,#bbbfc4 56%,#d0d5d9 70%,#b8bec3 84%,#cdd2d6 100%)",
+                  }}
                 >
-                  <div className="opacity-20 flex items-center justify-center w-full h-full">
-                    <img src="/logo.png" alt="One Step B" className="h-48 md:h-64 object-contain scale-[1.5]" />
+                  {/* Horizontal micro-line brush texture */}
+                  <div
+                    className="absolute inset-0 opacity-35"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(180deg,transparent 0px,transparent 2px,rgba(255,255,255,0.18) 2px,rgba(255,255,255,0.18) 3px)",
+                    }}
+                  />
+                  {/* Edge gloss highlight */}
+                  <div
+                    className="absolute inset-0 rounded-t-3xl"
+                    style={{
+                      boxShadow:
+                        "inset 0 1px 0 rgba(255,255,255,0.65),inset 0 -1px 0 rgba(0,0,0,0.12),inset 1px 0 0 rgba(255,255,255,0.3),inset -1px 0 0 rgba(0,0,0,0.08)",
+                    }}
+                  />
+                  {/* Engraved logo — multiply blend makes it look carved into the metal */}
+                  <div className="relative z-10">
+                    <img
+                      src="/logo.png"
+                      alt="One Step B"
+                      className="h-20 md:h-28 object-contain"
+                      style={{
+                        filter: "brightness(0.52) contrast(1.15) grayscale(0.2)",
+                        opacity: 0.42,
+                        mixBlendMode: "multiply",
+                      }}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -396,8 +435,16 @@ export default function Home() {
         {/* ══════════════════════════════════════════════════════════════════
             §2  MISSION REVEAL
             ══════════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center px-6 py-32 bg-bp-bg">
-          <div className="max-w-4xl mx-auto text-center">
+        <section className="min-h-screen flex items-center justify-center px-6 py-32 bg-white relative overflow-hidden">
+          {/* Subtle radial ambient */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 55% at 50% 50%, rgba(27,58,95,0.05) 0%, transparent 70%)",
+            }}
+          />
+          <div className="max-w-4xl mx-auto text-center relative z-10">
             <p className="text-[10px] tracking-[0.25em] font-semibold text-bp-muted uppercase mb-10">
               Our Mission
             </p>
@@ -426,36 +473,39 @@ export default function Home() {
         </section>
 
         {/* ══════════════════════════════════════════════════════════════════
-            §3  SERVICES
+            §3  SERVICES — sticky stacking cards
             ══════════════════════════════════════════════════════════════════ */}
         {isSimpleMode ? (
-          /* ── MOBILE / REDUCED MOTION: vertical stack ── */
-          <section className="py-20 px-6 bg-bp-surface border-t border-[#141619]/10">
-            <div className="max-w-6xl mx-auto">
-              <div className="mb-12">
+          /* ── MOBILE / REDUCED MOTION: animated vertical grid ── */
+          <section className="py-24 px-6 bg-white border-t border-[#E5E9EE]">
+            <div className="max-w-5xl mx-auto">
+              <div className="mb-14">
                 <div className="w-8 h-0.5 bg-brand-orange mb-5" />
                 <p className="text-[10px] tracking-[0.25em] font-semibold text-bp-muted uppercase mb-3">What We Do</p>
-                <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-brand-navy">
+                <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-brand-navy leading-[1.05]">
                   Everything you need.<br />Under one roof.
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {SERVICES.map((svc, i) => (
                   <motion.div
                     key={svc.title}
-                    className={`${svc.bg} rounded-3xl p-8 border border-black/5`}
-                    initial={{ opacity: 0, y: 20 }}
+                    className={`${svc.stackBg} rounded-3xl p-8 border border-black/5 overflow-hidden relative`}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-10%" }}
                     transition={{ duration: 0.6, ease: EASE_OUT, delay: i * 0.08 }}
                   >
-                    <div className={`${svc.accentClass} mb-5`}>{svc.icon}</div>
-                    <p className={`text-[10px] tracking-[0.2em] font-bold uppercase mb-2 ${svc.accentClass}`}>{svc.eyebrow}</p>
-                    <h3 className={`text-2xl font-black tracking-tight mb-3 ${svc.textClass}`}>{svc.title}</h3>
+                    <span className={`absolute -right-4 -bottom-6 text-[7rem] font-black leading-none select-none pointer-events-none ${svc.numClass}`}>
+                      {svc.number}
+                    </span>
+                    <div className={`${svc.iconClass} mb-5`}>{svc.icon}</div>
+                    <p className={`text-[10px] tracking-[0.22em] font-bold uppercase mb-2 ${svc.eyebrowClass}`}>{svc.eyebrow}</p>
+                    <h3 className={`text-2xl font-black tracking-tight mb-3 ${svc.titleClass}`}>{svc.title}</h3>
                     <p className={`text-sm leading-relaxed mb-7 ${svc.descClass}`}>{svc.desc}</p>
                     <Link
                       to={svc.link}
-                      className={`inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full transition-all ${svc.btnClass}`}
+                      className={`inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-300 hover:scale-[1.02] ${svc.btnClass}`}
                     >
                       Learn more <ArrowRight size={14} />
                     </Link>
@@ -465,60 +515,65 @@ export default function Home() {
             </div>
           </section>
         ) : (
-          /* ── DESKTOP: horizontal pinned scroll ── */
-          <div ref={servicesOuterRef} className="relative h-[400vh]">
-            <div className="sticky top-0 h-screen overflow-hidden">
-              <motion.div
-                className="flex h-full"
-                style={{ x: servicesX }}
+          /* ── DESKTOP: CSS sticky stacking cards ── */
+          <div className="relative">
+            {SERVICES.map((svc, i) => (
+              <div
+                key={svc.title}
+                className={`sticky top-0 h-screen overflow-hidden ${svc.stackBg} ${svc.stackBorder}`}
+                style={{ zIndex: i + 2 }}
               >
-                {SERVICES.map((svc, cardIdx) => (
-                  <div
-                    key={svc.title}
-                    className={`relative w-screen h-full shrink-0 flex items-center ${svc.bg}`}
-                  >
-                    <div className="max-w-xl mx-auto px-12 md:px-20 lg:px-24">
-                      {/* Giant number watermark */}
-                      <span className={`block text-[9rem] font-black leading-none opacity-[0.07] mb-3 ${svc.textClass}`}>
+                <div className="h-full max-w-7xl mx-auto px-10 md:px-16 lg:px-24 flex items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 w-full items-center">
+
+                    {/* Left: text */}
+                    <div className="relative">
+                      <span className={`absolute -left-2 -top-10 text-[11rem] font-black leading-none select-none pointer-events-none ${svc.numClass}`}>
                         {svc.number}
                       </span>
-
-                      <div className={`mb-6 ${svc.accentClass}`}>{svc.icon}</div>
-
-                      <p className={`text-[10px] tracking-[0.25em] font-bold uppercase mb-3 ${svc.accentClass}`}>
+                      <p className={`text-[10px] tracking-[0.25em] font-bold uppercase mb-5 relative z-10 ${svc.eyebrowClass}`}>
                         {svc.eyebrow}
                       </p>
-                      <h2 className={`text-[clamp(3rem,5.5vw,5rem)] font-black tracking-tighter leading-none mb-6 ${svc.textClass}`}>
+                      <h2 className={`text-[clamp(2.8rem,4.8vw,4.4rem)] font-black tracking-tighter leading-[1.0] mb-6 relative z-10 ${svc.titleClass}`}>
                         {svc.title}
                       </h2>
-                      <p className={`text-lg leading-relaxed mb-10 max-w-md ${svc.descClass}`}>
+                      <p className={`text-lg leading-relaxed mb-10 max-w-md relative z-10 ${svc.descClass}`}>
                         {svc.desc}
                       </p>
                       <Link
                         to={svc.link}
-                        className={`inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] ${svc.btnClass}`}
+                        className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] relative z-10 ${svc.btnClass}`}
                       >
                         Learn more <ArrowRight size={16} />
                       </Link>
                     </div>
 
-                    {/* Progress dots */}
-                    <div className="absolute bottom-12 left-12 md:left-20 lg:left-24 flex gap-2 items-center">
-                      {SERVICES.map((_, j) => (
-                        <div
-                          key={j}
-                          className={`h-0.5 rounded-full transition-all duration-300 ${
-                            j === cardIdx
-                              ? `w-8 ${svc.activeDotClass}`
-                              : `w-3 ${svc.dotClass}`
-                          }`}
-                        />
-                      ))}
+                    {/* Right: icon visual */}
+                    <div className="hidden lg:flex items-center justify-center">
+                      <div className={`w-56 h-56 rounded-[2.5rem] ${svc.iconBg} flex items-center justify-center ${svc.iconClass}`}
+                           style={{ transform: "scale(1)" }}>
+                        <div style={{ transform: "scale(2.6)" }}>{svc.icon}</div>
+                      </div>
                     </div>
+
                   </div>
-                ))}
-              </motion.div>
-            </div>
+                </div>
+
+                {/* Progress dots — bottom left */}
+                <div className="absolute bottom-10 left-10 md:left-16 lg:left-24 flex gap-2 items-center">
+                  {SERVICES.map((_, j) => (
+                    <div
+                      key={j}
+                      className={`h-[2px] rounded-full transition-all duration-300 ${
+                        j <= i
+                          ? `w-7 ${svc.dotActive}`
+                          : `w-3 ${svc.dotInactive}`
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         )}
 

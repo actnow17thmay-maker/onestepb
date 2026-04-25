@@ -241,7 +241,7 @@ export default function Home() {
           >
             <motion.div
               className="relative w-full aspect-[16/10]"
-              style={{ rotateX: containerRotateX, transformStyle: "preserve-3d" }}
+              style={{ rotateX: containerRotateX, transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
             >
               {/* ── LID ─── */}
               <motion.div
@@ -250,12 +250,13 @@ export default function Home() {
                   rotateX: lidRotateX,
                   transformOrigin: "bottom center",
                   transformStyle: "preserve-3d",
+                  WebkitTransformStyle: "preserve-3d",
                 }}
               >
                 {/* SCREEN FACE */}
                 <div
                   className="absolute inset-0 bg-bp-surface rounded-t-3xl overflow-hidden flex flex-col border-[12px] border-[#141619]"
-                  style={{ backfaceVisibility: "hidden" }}
+                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                 >
                   {/* Chrome bar */}
                   <div className="flex justify-between items-center px-4 py-2.5 border-b border-[#141619]/10 bg-[#F8F9FA] shrink-0">
@@ -371,6 +372,7 @@ export default function Home() {
                   style={{
                     transform: "rotateX(180deg)",
                     backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                     background:
                       "linear-gradient(110deg,#b2b8be 0%,#d4dade 14%,#bfc5ca 28%,#dde1e5 42%,#bbbfc4 56%,#d0d5d9 70%,#b8bec3 84%,#cdd2d6 100%)",
                   }}

@@ -192,6 +192,9 @@ export default function Home() {
   const baseY = useTransform(scrollYProgress, [0.7, 1], ["0px", "200px"]);
   const dashboardOpacity = useTransform(scrollYProgress, [0.7, 0.85], [1, 0]);
   const screenContentOpacity = useTransform(scrollYProgress, [0.82, 0.95], [0, 1]);
+  // Opacity-based face switching — Safari-safe alternative to backfaceVisibility
+  const lidBackOpacity = useTransform(lidRotateX, [-170, -95, -80, 0], [1, 1, 0, 0]);
+  const screenFaceOpacity = useTransform(lidRotateX, [-170, -95, -80, 0], [0, 0, 1, 1]);
 
   // ── Timeline scroll ───────────────────────────────────────────────────────
   const { scrollYProgress: timelineProgress } = useScroll({
@@ -241,7 +244,7 @@ export default function Home() {
           >
             <motion.div
               className="relative w-full aspect-[16/10]"
-              style={{ rotateX: containerRotateX, transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
+              style={{ rotateX: containerRotateX }}
             >
               {/* ── LID ─── */}
               <motion.div
@@ -249,14 +252,12 @@ export default function Home() {
                 style={{
                   rotateX: lidRotateX,
                   transformOrigin: "bottom center",
-                  transformStyle: "preserve-3d",
-                  WebkitTransformStyle: "preserve-3d",
                 }}
               >
-                {/* SCREEN FACE */}
-                <div
+                {/* SCREEN FACE — shown via opacity when lid is open */}
+                <motion.div
                   className="absolute inset-0 bg-bp-surface rounded-t-3xl overflow-hidden flex flex-col border-[12px] border-[#141619]"
-                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                  style={{ opacity: screenFaceOpacity }}
                 >
                   {/* Chrome bar */}
                   <div className="flex justify-between items-center px-4 py-2.5 border-b border-[#141619]/10 bg-[#F8F9FA] shrink-0">
@@ -364,15 +365,14 @@ export default function Home() {
                     </motion.div>
 
                   </div>
-                </div>
+                </motion.div>
 
                 {/* LID BACK — brushed aluminium + engraved logo */}
-                <div
+                {/* opacity-controlled so it shows when lid is closed — Safari-safe */}
+                <motion.div
                   className="absolute inset-0 rounded-t-3xl overflow-hidden flex items-center justify-center"
                   style={{
-                    transform: "rotateX(180deg)",
-                    backfaceVisibility: "hidden",
-                    WebkitBackfaceVisibility: "hidden",
+                    opacity: lidBackOpacity,
                     background:
                       "linear-gradient(110deg,#b2b8be 0%,#d4dade 14%,#bfc5ca 28%,#dde1e5 42%,#bbbfc4 56%,#d0d5d9 70%,#b8bec3 84%,#cdd2d6 100%)",
                   }}
@@ -406,13 +406,13 @@ export default function Home() {
                       }}
                     />
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
 
               {/* ── KEYBOARD BASE ─── */}
               <motion.div
                 className="absolute top-full left-0 w-full aspect-[16/7] origin-top"
-                style={{ opacity: baseOpacity, y: baseY, transformStyle: "preserve-3d" }}
+                style={{ opacity: baseOpacity, y: baseY }}
               >
                 <div className="w-full h-full bg-gradient-to-b from-[#e5e7eb] to-[#d1d5db] rounded-b-3xl border border-[#141619]/15 shadow-[0_40px_100px_rgba(0,0,0,0.3)] flex flex-col items-center p-6">
                   <div className="w-[60%] h-4 bg-[#141619] rounded-b-md mb-5 shadow-inner border-b border-white/10" />

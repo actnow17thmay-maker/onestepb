@@ -213,7 +213,7 @@ export default function Home() {
           §1  HERO — LAPTOP HINGE
           ══════════════════════════════════════════════════════════════════ */}
       <div ref={containerRef} className="h-[220vh] md:h-[350vh] relative z-10">
-        <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center perspective-[2500px]">
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center perspective-[2500px]" style={{ clipPath: "inset(0)", WebkitPerspective: "2500px" }}>
 
           {/* Hero text */}
           <motion.div
@@ -237,7 +237,7 @@ export default function Home() {
           {/* Laptop assembly */}
           <motion.div
             className="relative w-[95vw] md:w-[75vw] lg:w-[65vw] flex flex-col items-center z-10 perspective-[2000px]"
-            style={{ y: translateY, scale }}
+            style={{ y: translateY, scale, WebkitPerspective: "2000px" }}
           >
             <motion.div
               className="relative w-full aspect-[16/10]"

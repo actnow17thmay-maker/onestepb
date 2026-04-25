@@ -48,7 +48,7 @@ export default function Home() {
   const LOGOS = ["logoipsum", "LOGOIPSUM", "logoipsum", "LOGOIPSUM", "logoipsum"];
 
   return (
-    <div className="bg-bp-bg text-bp-text selection:bg-bp-lime selection:text-white font-sans">
+    <div className="bg-bp-bg text-bp-text selection:bg-brand-orange selection:text-white font-sans">
 
       <div className="fixed inset-0 pointer-events-none bg-grid-pattern opacity-30 z-0"></div>
 
@@ -62,12 +62,12 @@ export default function Home() {
             className="absolute top-[12vh] md:top-[15vh] left-0 w-full text-center z-0 flex flex-col items-center px-4"
             style={{ opacity: outerOpacity }}
           >
-            <div className="inline-block border border-[#141619]/15 bg-[#141619]/5 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest text-bp-lime mb-6 uppercase shadow-[0_0_20px_var(--color-bp-lime-glow)] mt-4 md:mt-0">
+            <div className="inline-block border border-[#141619]/15 bg-[#141619]/5 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest text-brand-orange mb-6 uppercase shadow-[0_0_20px_rgba(232,119,34,0.2)] mt-4 md:mt-0">
               Next Generation Talent Engine
             </div>
             <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-bold tracking-tight mb-4 md:mb-6 max-w-4xl leading-[1.05]">
               One Step Beyond. <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-bp-lime to-bp-text">Hiring, Learning</span> & Opportunity.
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-bp-text">Hiring, Learning</span> & Opportunity.
             </h1>
             <p className="text-bp-muted max-w-xl mx-auto text-lg leading-relaxed">
               We build the technology, services, and talent engines that power the next generation of careers.
@@ -112,8 +112,8 @@ export default function Home() {
                            <div><div className="text-4xl font-bold mb-2">95%</div><div className="text-sm text-bp-muted">Client Satisfaction Rate</div></div>
                         </div>
                         <div className="bg-[#141619]/5 border border-[#141619]/15 rounded-2xl p-6 flex flex-col justify-between">
-                           <div className="w-10 h-10 rounded-lg bg-bp-lime/20 text-bp-lime flex items-center justify-center mb-4"><Database size={20} /></div>
-                           <div><div className="text-4xl font-bold mb-2 text-bp-lime">120K+</div><div className="text-sm text-bp-muted">Candidates Placed Globally</div></div>
+                           <div className="w-10 h-10 rounded-lg bg-brand-green/20 text-brand-green flex items-center justify-center mb-4"><Database size={20} /></div>
+                           <div><div className="text-4xl font-bold mb-2 text-brand-green">120K+</div><div className="text-sm text-bp-muted">Candidates Placed Globally</div></div>
                         </div>
                         <div className="bg-[#141619]/5 border border-[#141619]/15 rounded-2xl p-6 flex flex-col justify-between">
                            <div className="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center mb-4"><BarChart3 size={20} /></div>
@@ -121,14 +121,14 @@ export default function Home() {
                         </div>
 
                         <div className="md:col-span-3 bg-gradient-to-r from-bp-secondary to-bp-surface border border-[#141619]/15 rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center mt-2 relative overflow-hidden">
-                           <div className="absolute right-0 top-0 w-64 h-64 bg-bp-lime/20 blur-[80px] rounded-full pointer-events-none"></div>
+                           <div className="absolute right-0 top-0 w-64 h-64 bg-brand-orange/20 blur-[80px] rounded-full pointer-events-none"></div>
                            <div className="flex-1 space-y-4 relative z-10">
                               <h3 className="text-2xl font-bold">Three Pillars. One Platform.</h3>
                               <p className="text-bp-muted text-sm leading-relaxed max-w-lg">AI-powered job matching, full-cycle recruitment expertise, and industry-aligned training programs built for scale.</p>
                            </div>
-                           <div className="w-32 h-32 rounded-full border-4 border-bp-lime/30 border-t-bp-lime animate-spin flex items-center justify-center relative z-10">
-                              <div className="w-24 h-24 rounded-full bg-bp-lime/10 flex items-center justify-center animate-pulse">
-                                 <ShieldCheck size={32} className="text-bp-lime" />
+                           <div className="w-32 h-32 rounded-full border-4 border-brand-orange/30 border-t-brand-orange animate-spin flex items-center justify-center relative z-10">
+                              <div className="w-24 h-24 rounded-full bg-brand-orange/10 flex items-center justify-center animate-pulse">
+                                 <ShieldCheck size={32} className="text-brand-orange" />
                               </div>
                            </div>
                         </div>
@@ -193,7 +193,7 @@ export default function Home() {
               <div className="relative pl-12 md:pl-16">
                 <div className="absolute left-[-24px] top-0 bottom-0 w-[2px] bg-[#141619]/10 rounded-full hidden lg:block">
                   <motion.div
-                    className="w-full bg-bp-lime rounded-full"
+                    className="w-full bg-brand-orange rounded-full"
                     style={{ height: "25%", y: `${activeFeature * 100}%` }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
@@ -202,7 +202,7 @@ export default function Home() {
                 {OSB_FEATURES.map((feat, idx) => (
                   <div key={idx} className={`transition-all duration-500 cursor-pointer pb-6 ${activeFeature === idx ? 'opacity-100 scale-100' : 'opacity-40 scale-95'}`}>
                     <div className="flex items-start gap-4 md:gap-6">
-                      <div className={`shrink-0 p-2 md:p-3 rounded-lg ${activeFeature === idx ? 'bg-bp-lime/20 text-bp-lime' : 'bg-[#141619]/5 text-bp-muted'}`}>
+                      <div className={`shrink-0 p-2 md:p-3 rounded-lg ${activeFeature === idx ? 'bg-brand-orange/20 text-brand-orange' : 'bg-[#141619]/5 text-bp-muted'}`}>
                         {feat.icon}
                       </div>
                       <div className="flex flex-col flex-1 pt-1">
@@ -230,7 +230,7 @@ export default function Home() {
               {/* Right Side: Dynamic Visual/Mockup */}
               <div className="hidden lg:flex justify-center relative">
                 <div className="w-[500px] h-[500px] bg-gradient-to-tr from-bp-surface to-bp-bg rounded-[2rem] border border-[#141619]/15 shadow-2xl relative overflow-hidden flex items-center justify-center">
-                  <div className="absolute inset-0 bg-bp-lime/20 blur-3xl rounded-full mix-blend-screen animate-pulse"></div>
+                  <div className="absolute inset-0 bg-brand-orange/20 blur-3xl rounded-full mix-blend-screen animate-pulse"></div>
 
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -241,21 +241,21 @@ export default function Home() {
                       transition={{ duration: 0.4 }}
                       className="relative z-10 w-full h-full flex flex-col p-8"
                     >
-                      <div className="text-bp-lime mb-6 p-4 rounded-xl bg-bp-lime/10 inline-block w-max">
+                      <div className="text-brand-orange mb-6 p-4 rounded-xl bg-brand-orange/10 inline-block w-max">
                         {OSB_FEATURES[activeFeature].icon}
                       </div>
                       <h4 className="text-3xl font-bold mb-4">{OSB_FEATURES[activeFeature].title}</h4>
 
                       <div className="w-full h-full bg-bp-bg rounded-xl border border-[#141619]/10 shadow-sm p-8 flex flex-col items-center justify-center relative overflow-hidden">
-                      <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-bp-lime to-transparent"></div>
-                      <div className="w-16 h-16 rounded-full bg-bp-lime/10 flex items-center justify-center text-bp-lime mb-6">
+                      <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-orange to-transparent"></div>
+                      <div className="w-16 h-16 rounded-full bg-brand-orange/10 flex items-center justify-center text-brand-orange mb-6">
                         {OSB_FEATURES[activeFeature].icon}
                       </div>
                       <div className="space-y-4 w-full max-w-[200px] opacity-20">
                         <div className="w-full h-12 bg-[#141619]/5 rounded-lg"></div>
                         <div className="w-3/4 h-12 bg-[#141619]/5 rounded-lg"></div>
                         <div className="w-full h-32 bg-[#141619]/5 rounded-lg border border-[#141619]/15 mt-8 flex items-center justify-center">
-                           <div className="w-8 h-8 rounded-full border-2 border-bp-lime border-t-transparent animate-spin"></div>
+                           <div className="w-8 h-8 rounded-full border-2 border-brand-orange border-t-transparent animate-spin"></div>
                         </div>
                       </div>
                       <div className="text-bp-muted text-sm font-mono tracking-widest mt-4">VISUALIZING DATA...</div>
@@ -274,7 +274,7 @@ export default function Home() {
         <section id="investors" className="py-20 md:py-32 px-6 bg-bp-surface border-t border-[#141619]/10 relative overflow-hidden flex flex-col items-center justify-center scroll-mt-20">
 
           <div className="text-center max-w-3xl mb-12 md:mb-20 relative z-10 mx-auto">
-            <h2 className="text-bp-lime font-bold tracking-widest uppercase text-sm mb-4">Our Backers</h2>
+            <h2 className="text-brand-orange font-bold tracking-widest uppercase text-sm mb-4">Our Backers</h2>
             <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-bp-text tracking-tighter leading-tight">
               Backed by visionary investors and global industry leaders.
             </h3>
@@ -325,7 +325,7 @@ export default function Home() {
                  </div>
               </div>
 
-              <div className="col-span-2 md:col-span-2 lg:col-span-2 group relative h-32 bg-[#141619] text-white hover:bg-bp-lime rounded-2xl border border-[#141619]/10 transition-all duration-500 flex items-center justify-center hover:shadow-[0_20px_50px_rgba(10,33,192,0.3)] cursor-pointer overflow-hidden">
+              <div className="col-span-2 md:col-span-2 lg:col-span-2 group relative h-32 bg-[#141619] text-white hover:bg-brand-orange rounded-2xl border border-[#141619]/10 transition-all duration-500 flex items-center justify-center hover:shadow-[0_20px_50px_rgba(232,119,34,0.3)] cursor-pointer overflow-hidden">
                  <div className="flex flex-col items-center justify-center text-center">
                    <span className="text-sm text-white/70 font-medium mb-1">Lead Investor</span>
                    <span className="font-black text-3xl tracking-tighter text-white">Aparna</span>
@@ -345,7 +345,7 @@ export default function Home() {
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-4 md:gap-8">
               <div>
-                <h2 className="text-6xl md:text-[8rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-bp-lime to-bp-text leading-none tracking-tighter">
+                <h2 className="text-6xl md:text-[8rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-brand-orange to-bp-text leading-none tracking-tighter">
                   Global
                 </h2>
                 <p className="text-2xl md:text-3xl font-bold mt-2">Presence & Contact</p>
@@ -356,7 +356,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
                {/* Locations Card (Span 8) */}
-               <div className="col-span-1 lg:col-span-8 bg-[#141619]/5 rounded-3xl p-8 md:p-12 border border-[#141619]/15 hover:border-bp-lime/50 transition-colors group relative overflow-hidden flex flex-col justify-between">
+               <div className="col-span-1 lg:col-span-8 bg-[#141619]/5 rounded-3xl p-8 md:p-12 border border-[#141619]/15 hover:border-brand-orange/50 transition-colors group relative overflow-hidden flex flex-col justify-between">
                  <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#141619_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
                  <div className="relative z-10 mb-12">
@@ -367,7 +367,7 @@ export default function Home() {
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
                     <div className="bg-white rounded-2xl p-6 border border-[#141619]/10 shadow-sm hover:shadow-xl transition-all group/loc">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-3 h-3 rounded-full bg-bp-lime animate-pulse"></div>
+                        <div className="w-3 h-3 rounded-full bg-brand-green animate-pulse"></div>
                         <h4 className="font-bold text-xl">India</h4>
                       </div>
                       <p className="text-sm text-bp-muted font-medium mb-1">Hyderabad HQ</p>
@@ -397,7 +397,7 @@ export default function Home() {
                {/* Contact Card (Span 4) */}
                <div className="col-span-1 lg:col-span-4 bg-[#141619] text-white rounded-3xl p-8 md:p-12 border border-[#141619]/15 shadow-2xl flex flex-col justify-between group">
                  <div>
-                   <div className="w-16 h-16 rounded-2xl bg-bp-lime/20 flex items-center justify-center text-bp-lime mb-8">
+                   <div className="w-16 h-16 rounded-2xl bg-brand-orange/20 flex items-center justify-center text-brand-orange mb-8">
                      <Mail size={32} strokeWidth={1.5} />
                    </div>
                    <h3 className="text-3xl font-black mb-4 tracking-tight">Let's Talk</h3>
@@ -405,16 +405,16 @@ export default function Home() {
 
                    <div className="space-y-6">
                      <a href="mailto:hr@onestepb.com" className="flex items-center gap-4 group/link">
-                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover/link:bg-bp-lime group-hover/link:text-[#141619] transition-colors">
+                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover/link:bg-brand-orange group-hover/link:text-white transition-colors">
                          <Mail size={16} />
                        </div>
-                       <span className="font-medium text-lg hover:text-bp-lime transition-colors">hr@onestepb.com</span>
+                       <span className="font-medium text-lg hover:text-brand-orange transition-colors">hr@onestepb.com</span>
                      </a>
                      <a href="tel:+919100585144" className="flex items-center gap-4 group/link">
-                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover/link:bg-bp-lime group-hover/link:text-[#141619] transition-colors">
+                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover/link:bg-brand-orange group-hover/link:text-white transition-colors">
                          <Phone size={16} />
                        </div>
-                       <span className="font-medium text-lg hover:text-bp-lime transition-colors">+91 91005 85144</span>
+                       <span className="font-medium text-lg hover:text-brand-orange transition-colors">+91 91005 85144</span>
                      </a>
                    </div>
                  </div>

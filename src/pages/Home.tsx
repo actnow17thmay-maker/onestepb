@@ -4,6 +4,7 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  useMotionTemplate,
 } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -192,9 +193,12 @@ export default function Home() {
   const baseY = useTransform(scrollYProgress, [0.7, 1], ["0px", "200px"]);
   const dashboardOpacity = useTransform(scrollYProgress, [0.7, 0.85], [1, 0]);
   const screenContentOpacity = useTransform(scrollYProgress, [0.82, 0.95], [0, 1]);
-  // Opacity-based face switching — Safari-safe alternative to backfaceVisibility
+  // Opacity-based face switching — Safari-safe (backfaceVisibility unreliable with Framer Motion CSS vars)
   const lidBackOpacity = useTransform(lidRotateX, [-170, -95, -80, 0], [1, 1, 0, 0]);
   const screenFaceOpacity = useTransform(lidRotateX, [-170, -95, -80, 0], [0, 0, 1, 1]);
+  // Concrete CSS transform strings — Safari preserve-3d requires real values, not CSS variables
+  const containerTransform = useMotionTemplate`rotateX(${containerRotateX}deg)`;
+  const lidTransform = useMotionTemplate`rotateX(${lidRotateX}deg)`;
 
   // ── Timeline scroll ───────────────────────────────────────────────────────
   const { scrollYProgress: timelineProgress } = useScroll({
@@ -244,20 +248,22 @@ export default function Home() {
           >
             <motion.div
               className="relative w-full aspect-[16/10]"
-              style={{ rotateX: containerRotateX }}
+              style={{ transform: containerTransform, transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
             >
               {/* ── LID ─── */}
               <motion.div
                 className="absolute inset-0 w-full h-full rounded-t-3xl"
                 style={{
-                  rotateX: lidRotateX,
+                  transform: lidTransform,
                   transformOrigin: "bottom center",
+                  transformStyle: "preserve-3d",
+                  WebkitTransformStyle: "preserve-3d",
                 }}
               >
-                {/* SCREEN FACE — shown via opacity when lid is open */}
+                {/* SCREEN FACE — backfaceVisibility + opacity (belt-and-suspenders for Safari) */}
                 <motion.div
                   className="absolute inset-0 bg-bp-surface rounded-t-3xl overflow-hidden flex flex-col border-[12px] border-[#141619]"
-                  style={{ opacity: screenFaceOpacity }}
+                  style={{ opacity: screenFaceOpacity, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                 >
                   {/* Chrome bar */}
                   <div className="flex justify-between items-center px-4 py-2.5 border-b border-[#141619]/10 bg-[#F8F9FA] shrink-0">
@@ -373,6 +379,9 @@ export default function Home() {
                   className="absolute inset-0 rounded-t-3xl overflow-hidden flex items-center justify-center"
                   style={{
                     opacity: lidBackOpacity,
+                    transform: "rotateX(180deg)",
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                     background:
                       "linear-gradient(110deg,#b2b8be 0%,#d4dade 14%,#bfc5ca 28%,#dde1e5 42%,#bbbfc4 56%,#d0d5d9 70%,#b8bec3 84%,#cdd2d6 100%)",
                   }}

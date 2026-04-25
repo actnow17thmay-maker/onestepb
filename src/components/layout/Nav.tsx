@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, MessageCircle, Menu, X } from "lucide-react";
+import { scrollToTop } from "./SmoothScroll";
 
 function LinkedInIcon({ size = 20 }: { size?: number }) {
   return (
@@ -29,17 +30,26 @@ export default function Nav() {
 
   const close = () => setMobileOpen(false);
 
+  // If already on the target path, just scroll to top instead of navigating
+  const handleSamePageLink = (to: string) => (e: React.MouseEvent) => {
+    if (pathname === to) {
+      e.preventDefault();
+      scrollToTop();
+    }
+    close();
+  };
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 px-5 md:px-6 flex justify-between items-center z-50 bg-bp-bg/90 backdrop-blur-md border-b border-[#141619]/5 h-[64px]">
         {/* Logo */}
-        <Link to="/" onClick={close}>
+        <Link to="/" onClick={handleSamePageLink("/")}>
           <img src="/logo.png" alt="One Step B" className="h-24 md:h-28 object-contain scale-[1.2] origin-left" />
         </Link>
 
         {/* Desktop links */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-bp-muted items-center">
-          <Link to="/" className="hover:text-bp-text transition-colors">Home</Link>
+          <Link to="/" onClick={handleSamePageLink("/")} className="hover:text-bp-text transition-colors">Home</Link>
           <Link to="/about" className="hover:text-bp-text transition-colors">About</Link>
 
           <div className="relative group">
@@ -93,7 +103,7 @@ export default function Nav() {
           <div className="flex flex-col px-6 pt-6 pb-10 gap-1">
 
             <p className="text-[10px] tracking-[0.2em] font-bold text-bp-muted uppercase mb-3">Navigate</p>
-            <Link to="/" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Home</Link>
+            <Link to="/" onClick={handleSamePageLink("/")} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Home</Link>
             <Link to="/about" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">About</Link>
             <Link to="/contact" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Contact</Link>
 

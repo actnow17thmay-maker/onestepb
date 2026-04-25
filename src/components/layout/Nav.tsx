@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, MessageCircle } from "lucide-react";
+import { ChevronDown, MessageCircle, Menu, X } from "lucide-react";
 
 function LinkedInIcon({ size = 20 }: { size?: number }) {
   return (
@@ -10,26 +11,37 @@ function LinkedInIcon({ size = 20 }: { size?: number }) {
 }
 
 const LINKEDIN_URL = "https://www.linkedin.com/company/onestepb/";
-const WHATSAPP_URL = "https://wa.me/917330686621";
+const WHATSAPP_URL = "https://wa.me/919100585144";
 
 export default function Nav() {
   const { pathname } = useLocation();
   const showWhatsApp = pathname !== "/contact";
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Close menu on route change
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
+
+  // Lock body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  const close = () => setMobileOpen(false);
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 p-4 px-6 flex justify-between items-center z-50 bg-bp-bg/85 backdrop-blur-md border-b border-[#141619]/5">
-        <div className="font-bold text-xl flex items-center tracking-tight h-10 overflow-visible">
-          <Link to="/">
-            <img src="/logo.png" alt="One Step B" className="h-28 md:h-32 object-contain scale-[1.2] origin-left" />
-          </Link>
-        </div>
+      <nav className="fixed top-0 left-0 right-0 px-5 md:px-6 flex justify-between items-center z-50 bg-bp-bg/90 backdrop-blur-md border-b border-[#141619]/5 h-[64px]">
+        {/* Logo */}
+        <Link to="/" onClick={close}>
+          <img src="/logo.png" alt="One Step B" className="h-24 md:h-28 object-contain scale-[1.2] origin-left" />
+        </Link>
 
+        {/* Desktop links */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-bp-muted items-center">
           <Link to="/" className="hover:text-bp-text transition-colors">Home</Link>
           <Link to="/about" className="hover:text-bp-text transition-colors">About</Link>
 
-          {/* What we do dropdown */}
           <div className="relative group">
             <button className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4">
               What we do <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-300" />
@@ -42,7 +54,6 @@ export default function Nav() {
             </div>
           </div>
 
-          {/* Company dropdown */}
           <div className="relative group">
             <button className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4">
               Company <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-300" />
@@ -56,21 +67,62 @@ export default function Nav() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-bp-muted hover:text-[#0A66C2] transition-colors"
-            aria-label="LinkedIn"
-          >
+        {/* Desktop right actions */}
+        <div className="hidden md:flex items-center gap-4">
+          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-bp-muted hover:text-[#0A66C2] transition-colors" aria-label="LinkedIn">
             <LinkedInIcon size={20} />
           </a>
-          <button className="bg-bp-lime text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-[0_0_15px_var(--color-bp-lime-glow)] hover:shadow-[0_0_25px_var(--color-bp-lime-glow)] transition-all">
+          <Link to="/contact" className="bg-brand-orange text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-[#d06515] transition-all">
             Get Started
-          </button>
+          </Link>
         </div>
+
+        {/* Mobile: hamburger */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden p-2 rounded-lg text-bp-text hover:bg-[#141619]/5 transition-colors"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </nav>
+
+      {/* Mobile menu overlay */}
+      {mobileOpen && (
+        <div className="fixed inset-0 top-[64px] z-40 bg-white flex flex-col overflow-y-auto md:hidden">
+          <div className="flex flex-col px-6 pt-6 pb-10 gap-1">
+
+            <p className="text-[10px] tracking-[0.2em] font-bold text-bp-muted uppercase mb-3">Navigate</p>
+            <Link to="/" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Home</Link>
+            <Link to="/about" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">About</Link>
+            <Link to="/contact" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Contact</Link>
+
+            <p className="text-[10px] tracking-[0.2em] font-bold text-bp-muted uppercase mt-6 mb-3">What We Do</p>
+            <Link to="/services/job-portal" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Job Portal <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+            <Link to="/services/recruitment" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Recruitment <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+            <Link to="/services/training" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Training <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+            <Link to="/services/industries" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Industries <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+
+            <div className="mt-8 flex flex-col gap-3">
+              <Link
+                to="/contact"
+                onClick={close}
+                className="w-full py-4 bg-brand-orange text-white rounded-2xl font-bold text-center text-base hover:bg-[#d06515] transition-all"
+              >
+                Get Started
+              </Link>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 bg-[#141619]/5 text-brand-navy rounded-2xl font-bold text-center text-base flex items-center justify-center gap-2"
+              >
+                <LinkedInIcon size={18} /> LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Floating WhatsApp button — hidden on /contact */}
       {showWhatsApp && (

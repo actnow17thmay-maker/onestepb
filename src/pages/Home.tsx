@@ -212,7 +212,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════════════════
           §1  HERO — LAPTOP HINGE
           ══════════════════════════════════════════════════════════════════ */}
-      <div ref={containerRef} className="h-[350vh] relative z-10">
+      <div ref={containerRef} className="h-[220vh] md:h-[350vh] relative z-10">
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center perspective-[2500px]">
 
           {/* Hero text */}
@@ -435,7 +435,7 @@ export default function Home() {
         {/* ══════════════════════════════════════════════════════════════════
             §2  MISSION REVEAL
             ══════════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center px-6 py-32 bg-white relative overflow-hidden">
+        <section className="flex items-center justify-center px-6 py-20 md:py-32 md:min-h-screen bg-white relative overflow-hidden">
           {/* Subtle radial ambient */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -580,7 +580,7 @@ export default function Home() {
         {/* ══════════════════════════════════════════════════════════════════
             §4  STATS COUNT-UP
             ══════════════════════════════════════════════════════════════════ */}
-        <section className="py-32 px-6 bg-bp-bg border-t border-[#141619]/10">
+        <section className="py-16 md:py-32 px-6 bg-bp-bg border-t border-[#141619]/10">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-20">
               <div className="w-8 h-0.5 bg-brand-orange mx-auto mb-6" />
@@ -613,7 +613,7 @@ export default function Home() {
             ══════════════════════════════════════════════════════════════════ */}
         <section
           ref={timelineRef}
-          className="py-32 px-6 bg-bp-surface border-t border-[#141619]/10 relative overflow-hidden"
+          className="py-16 md:py-32 px-6 bg-bp-surface border-t border-[#141619]/10 relative overflow-hidden"
         >
           <div className="max-w-4xl mx-auto">
             <div className="mb-20">
@@ -825,7 +825,7 @@ export default function Home() {
             The App.tsx <Footer> sits immediately after <Home> in the DOM
             and naturally scrolls over this sticky navy section.
             ══════════════════════════════════════════════════════════════════ */}
-        <div className="h-[200vh] relative">
+        <div className="h-[130vh] md:h-[200vh] relative">
           <div className="sticky top-0 h-screen z-0 bg-brand-navy flex flex-col items-center justify-center px-6 overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute inset-0 pointer-events-none">

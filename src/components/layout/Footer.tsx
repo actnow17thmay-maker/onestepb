@@ -10,7 +10,7 @@ function LinkedInIcon({ size = 14 }: { size?: number }) {
 import { Link } from "react-router-dom";
 
 const LINKEDIN_URL = "https://www.linkedin.com/company/onestepb/";
-const WHATSAPP_URL = "https://wa.me/917330686621";
+const WHATSAPP_URL = "https://wa.me/919100585144";
 
 export default function Footer() {
   return (

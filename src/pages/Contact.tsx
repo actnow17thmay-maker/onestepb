@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import ServicePageLayout from "../components/layout/ServicePageLayout";
 
 const LINKEDIN_URL = "https://www.linkedin.com/company/onestepb/";
-const WHATSAPP_URL = "https://wa.me/917330686621";
+const WHATSAPP_URL = "https://wa.me/919100585144";
 
 function LinkedInIcon({ size = 20 }: { size?: number }) {
   return (

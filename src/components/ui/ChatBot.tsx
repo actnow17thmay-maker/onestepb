@@ -138,7 +138,7 @@ export default function ChatBot() {
     <>
       {/* ── CHAT PANEL ─────────────────────────────────────────────────── */}
       {open && (
-        <div className="fixed bottom-24 left-4 md:left-6 z-50 w-[calc(100vw-2rem)] max-w-sm flex flex-col rounded-3xl shadow-2xl border border-[#141619]/10 overflow-hidden bg-white"
+        <div className="fixed bottom-[168px] right-4 md:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm flex flex-col rounded-3xl shadow-2xl border border-[#141619]/10 overflow-hidden bg-white"
           style={{ maxHeight: "min(520px, calc(100dvh - 120px))" }}>
 
           {/* Header */}
@@ -233,7 +233,7 @@ export default function ChatBot() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-6 left-4 md:left-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform bg-brand-navy"
+        className="fixed bottom-6 right-4 md:right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform bg-brand-navy"
       >
         {open
           ? <X size={22} className="text-white" />

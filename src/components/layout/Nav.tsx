@@ -30,8 +30,11 @@ export default function Nav() {
 
   const close = () => setMobileOpen(false);
 
-  // If already on the target path, just scroll to top instead of navigating
-  const handleSamePageLink = (to: string) => (e: React.MouseEvent) => {
+  // Works for every internal link:
+  // - If already on that page → scroll to top, don't re-navigate
+  // - Otherwise → let React Router navigate normally
+  // - Always closes mobile menu
+  const nav = (to: string) => (e: React.MouseEvent) => {
     if (pathname === to) {
       e.preventDefault();
       scrollToTop();
@@ -39,50 +42,60 @@ export default function Nav() {
     close();
   };
 
+  // Shared class for dropdown items
+  const dropItem = "px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text";
+  // Shared class for mobile nav items
+  const mobileItem = "py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8";
+  const mobileSubItem = "py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between";
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 px-5 md:px-6 flex justify-between items-center z-50 bg-bp-bg/90 backdrop-blur-md border-b border-[#141619]/5 h-[64px]">
+
         {/* Logo */}
-        <Link to="/" onClick={handleSamePageLink("/")}>
+        <Link to="/" onClick={nav("/")}>
           <img src="/logo.png" alt="One Step B" className="h-24 md:h-28 object-contain scale-[1.2] origin-left" />
         </Link>
 
-        {/* Desktop links */}
+        {/* ── Desktop links ────────────────────────────────────────── */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-bp-muted items-center">
-          <Link to="/" onClick={handleSamePageLink("/")} className="hover:text-bp-text transition-colors">Home</Link>
-          <Link to="/about" className="hover:text-bp-text transition-colors">About</Link>
 
+          <Link to="/" onClick={nav("/")} className="hover:text-bp-text transition-colors">Home</Link>
+          <Link to="/about" onClick={nav("/about")} className="hover:text-bp-text transition-colors">About</Link>
+
+          {/* What we do dropdown */}
           <div className="relative group">
             <button className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4">
               What we do <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-300" />
             </button>
             <div className="absolute top-[calc(100%+0.5rem)] left-0 w-48 bg-bp-surface border border-[#141619]/10 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2 z-50">
-              <Link to="/services/job-portal" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Job Portal</Link>
-              <Link to="/services/recruitment" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Recruitment</Link>
-              <Link to="/services/training" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Training</Link>
-              <Link to="/services/industries" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Industries</Link>
+              <Link to="/services/job-portal"   onClick={nav("/services/job-portal")}   className={dropItem}>Job Portal</Link>
+              <Link to="/services/recruitment"  onClick={nav("/services/recruitment")}  className={dropItem}>Recruitment</Link>
+              <Link to="/services/training"     onClick={nav("/services/training")}     className={dropItem}>Training</Link>
+              <Link to="/services/industries"   onClick={nav("/services/industries")}   className={dropItem}>Industries</Link>
             </div>
           </div>
 
+          {/* Company dropdown */}
           <div className="relative group">
             <button className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4">
               Company <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-300" />
             </button>
             <div className="absolute top-[calc(100%+0.5rem)] left-0 w-48 bg-bp-surface border border-[#141619]/10 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2 z-50">
-              <Link to="/careers" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Careers</Link>
-              <Link to="/insights" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Insights</Link>
-              <a href="#investors" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Investors</a>
-              <Link to="/contact" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Contact</Link>
+              <Link to="/careers"   onClick={nav("/careers")}   className={dropItem}>Careers</Link>
+              <Link to="/insights"  onClick={nav("/insights")}  className={dropItem}>Insights</Link>
+              <Link to="/investors" onClick={nav("/investors")} className={dropItem}>Investors</Link>
+              <Link to="/contact"   onClick={nav("/contact")}   className={dropItem}>Contact</Link>
             </div>
           </div>
         </div>
 
-        {/* Desktop right actions */}
+        {/* ── Desktop right actions ────────────────────────────────── */}
         <div className="hidden md:flex items-center gap-4">
           <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-bp-muted hover:text-[#0A66C2] transition-colors" aria-label="LinkedIn">
             <LinkedInIcon size={20} />
           </a>
-          <Link to="/contact" className="bg-brand-orange text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-[#d06515] transition-all">
+          <Link to="/contact" onClick={nav("/contact")} className="bg-brand-orange text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-[#d06515] transition-all">
             Get Started
           </Link>
         </div>
@@ -97,28 +110,29 @@ export default function Nav() {
         </button>
       </nav>
 
-      {/* Mobile menu overlay */}
+      {/* ── Mobile menu overlay ───────────────────────────────────────── */}
       {mobileOpen && (
         <div className="fixed inset-0 top-[64px] z-40 bg-white flex flex-col overflow-y-auto md:hidden">
           <div className="flex flex-col px-6 pt-6 pb-10 gap-1">
 
             <p className="text-[10px] tracking-[0.2em] font-bold text-bp-muted uppercase mb-3">Navigate</p>
-            <Link to="/" onClick={handleSamePageLink("/")} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Home</Link>
-            <Link to="/about" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">About</Link>
-            <Link to="/careers" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Careers</Link>
-            <Link to="/insights" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Insights</Link>
-            <Link to="/contact" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Contact</Link>
+            <Link to="/"          onClick={nav("/")}          className={mobileItem}>Home</Link>
+            <Link to="/about"     onClick={nav("/about")}     className={mobileItem}>About</Link>
+            <Link to="/careers"   onClick={nav("/careers")}   className={mobileItem}>Careers</Link>
+            <Link to="/insights"  onClick={nav("/insights")}  className={mobileItem}>Insights</Link>
+            <Link to="/investors" onClick={nav("/investors")} className={mobileItem}>Investors</Link>
+            <Link to="/contact"   onClick={nav("/contact")}   className={mobileItem}>Contact</Link>
 
             <p className="text-[10px] tracking-[0.2em] font-bold text-bp-muted uppercase mt-6 mb-3">What We Do</p>
-            <Link to="/services/job-portal" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Job Portal <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
-            <Link to="/services/recruitment" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Recruitment <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
-            <Link to="/services/training" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Training <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
-            <Link to="/services/industries" onClick={close} className="py-3 text-base font-medium text-brand-navy border-b border-[#141619]/8 flex items-center justify-between">Industries <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+            <Link to="/services/job-portal"  onClick={nav("/services/job-portal")}  className={mobileSubItem}>Job Portal   <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+            <Link to="/services/recruitment" onClick={nav("/services/recruitment")} className={mobileSubItem}>Recruitment  <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+            <Link to="/services/training"    onClick={nav("/services/training")}    className={mobileSubItem}>Training     <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
+            <Link to="/services/industries"  onClick={nav("/services/industries")}  className={mobileSubItem}>Industries   <ChevronDown size={14} className="-rotate-90 opacity-40" /></Link>
 
             <div className="mt-8 flex flex-col gap-3">
               <Link
                 to="/contact"
-                onClick={close}
+                onClick={nav("/contact")}
                 className="w-full py-4 bg-brand-orange text-white rounded-2xl font-bold text-center text-base hover:bg-[#d06515] transition-all"
               >
                 Get Started

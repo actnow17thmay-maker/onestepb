@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Insights from "./pages/Insights";
+import Investors from "./pages/Investors";
 import JobPortal from "./pages/services/JobPortal";
 import Recruitment from "./pages/services/Recruitment";
 import Training from "./pages/services/Training";
@@ -32,6 +33,7 @@ function Layout() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/investors" element={<Investors />} />
           <Route path="/services/job-portal" element={<JobPortal />} />
           <Route path="/services/recruitment" element={<Recruitment />} />
           <Route path="/services/training" element={<Training />} />

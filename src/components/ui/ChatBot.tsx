@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, ChevronRight, RotateCcw } from "lucide-react";
+import { Bot, X, ChevronRight, RotateCcw } from "lucide-react";
 
 // ─── Q&A DATA ───────────────────────────────────────────────────────────────
 interface QA {
@@ -145,7 +145,7 @@ export default function ChatBot() {
           <div className="flex items-center justify-between px-5 py-4 bg-brand-navy shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center">
-                <MessageCircle size={15} className="text-white" fill="white" />
+                <Bot size={16} className="text-white" />
               </div>
               <div>
                 <p className="text-white text-sm font-bold leading-tight">OSB Assistant</p>
@@ -237,7 +237,7 @@ export default function ChatBot() {
       >
         {open
           ? <X size={22} className="text-white" />
-          : <MessageCircle size={24} className="text-white" fill="white" />}
+          : <Bot size={24} className="text-white" />}
       </button>
     </>
   );

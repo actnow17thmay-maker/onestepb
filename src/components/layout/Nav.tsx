@@ -69,8 +69,8 @@ export default function Nav() {
               Company <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-300" />
             </button>
             <div className="absolute top-[calc(100%+0.5rem)] left-0 w-48 bg-bp-surface border border-[#141619]/10 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2 z-50">
-              <a href="#" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Careers</a>
-              <a href="#" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Insights</a>
+              <Link to="/careers" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Careers</Link>
+              <Link to="/insights" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Insights</Link>
               <a href="#investors" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Investors</a>
               <Link to="/contact" className="px-4 py-2 hover:bg-[#141619]/5 rounded-lg transition-colors text-bp-text">Contact</Link>
             </div>
@@ -105,6 +105,8 @@ export default function Nav() {
             <p className="text-[10px] tracking-[0.2em] font-bold text-bp-muted uppercase mb-3">Navigate</p>
             <Link to="/" onClick={handleSamePageLink("/")} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Home</Link>
             <Link to="/about" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">About</Link>
+            <Link to="/careers" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Careers</Link>
+            <Link to="/insights" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Insights</Link>
             <Link to="/contact" onClick={close} className="py-3.5 text-lg font-semibold text-brand-navy border-b border-[#141619]/8">Contact</Link>
 
             <p className="text-[10px] tracking-[0.2em] font-bold text-bp-muted uppercase mt-6 mb-3">What We Do</p>

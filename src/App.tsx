@@ -4,6 +4,7 @@ import SmoothScroll, { scrollToTop } from "./components/layout/SmoothScroll";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
 import PageTransition from "./components/layout/PageTransition";
+import ChatBot from "./components/ui/ChatBot";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -38,6 +39,7 @@ function Layout() {
         </Routes>
       </PageTransition>
       <Footer />
+      <ChatBot />
     </SmoothScroll>
   );
 }

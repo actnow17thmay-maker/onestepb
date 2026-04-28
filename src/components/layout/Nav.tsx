@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 
@@ -26,17 +26,42 @@ export default function Nav() {
   const { pathname } = useLocation();
   const showWhatsApp = pathname !== "/contact";
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Which desktop dropdown is open: "services" | "company" | null
+  const [openDropdown, setOpenDropdown] = useState<null | "services" | "company">(null);
+  const navRef = useRef<HTMLElement>(null);
 
-  // Close menu on route change
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  // Close menus on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  }, [pathname]);
 
-  // Lock body scroll when menu open
+  // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  const close = () => setMobileOpen(false);
+  // Close dropdown when tapping/clicking outside
+  useEffect(() => {
+    if (!openDropdown) return;
+    const handler = (e: MouseEvent | TouchEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, [openDropdown]);
+
+  const close = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  };
 
   // Works for every internal link:
   // - If already on that page → scroll to top, don't re-navigate
@@ -58,7 +83,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 px-5 md:px-6 flex justify-between items-center z-50 bg-bp-bg/90 backdrop-blur-md border-b border-[#141619]/5 h-[64px]">
+      <nav ref={navRef} className="fixed top-0 left-0 right-0 px-5 md:px-6 flex justify-between items-center z-50 bg-bp-bg/90 backdrop-blur-md border-b border-[#141619]/5 h-[64px]">
 
         {/* Logo */}
         <Link to="/" onClick={nav("/")}>
@@ -71,12 +96,25 @@ export default function Nav() {
           <Link to="/" onClick={nav("/")} className="hover:text-bp-text transition-colors">Home</Link>
           <Link to="/about" onClick={nav("/about")} className="hover:text-bp-text transition-colors">About</Link>
 
-          {/* What we do dropdown */}
-          <div className="relative group">
-            <button className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4">
-              What we do <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-300" />
+          {/* What we do dropdown — works on hover AND click/tap */}
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenDropdown("services")}
+            onMouseLeave={() => setOpenDropdown(null)}
+          >
+            <button
+              onClick={() => setOpenDropdown(openDropdown === "services" ? null : "services")}
+              className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4"
+              aria-expanded={openDropdown === "services"}
+            >
+              What we do
+              <ChevronDown size={14} className={`opacity-70 transition-transform duration-300 ${openDropdown === "services" ? "rotate-180" : ""}`} />
             </button>
-            <div className="absolute top-[calc(100%+0.5rem)] left-0 w-48 bg-bp-surface border border-[#141619]/10 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2 z-50">
+            <div className={`absolute top-[calc(100%+0.5rem)] left-0 w-48 bg-bp-surface border border-[#141619]/10 rounded-xl shadow-2xl flex flex-col p-2 z-50 transition-all duration-300 ${
+              openDropdown === "services"
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 translate-y-2 pointer-events-none"
+            }`}>
               <Link to="/services/job-portal"   onClick={nav("/services/job-portal")}   className={dropItem}>Job Portal</Link>
               <Link to="/services/recruitment"  onClick={nav("/services/recruitment")}  className={dropItem}>Recruitment</Link>
               <Link to="/services/training"     onClick={nav("/services/training")}     className={dropItem}>Training</Link>
@@ -84,12 +122,25 @@ export default function Nav() {
             </div>
           </div>
 
-          {/* Company dropdown */}
-          <div className="relative group">
-            <button className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4">
-              Company <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform duration-300" />
+          {/* Company dropdown — works on hover AND click/tap */}
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenDropdown("company")}
+            onMouseLeave={() => setOpenDropdown(null)}
+          >
+            <button
+              onClick={() => setOpenDropdown(openDropdown === "company" ? null : "company")}
+              className="flex items-center gap-1 hover:text-bp-text transition-colors py-4 -my-4"
+              aria-expanded={openDropdown === "company"}
+            >
+              Company
+              <ChevronDown size={14} className={`opacity-70 transition-transform duration-300 ${openDropdown === "company" ? "rotate-180" : ""}`} />
             </button>
-            <div className="absolute top-[calc(100%+0.5rem)] left-0 w-48 bg-bp-surface border border-[#141619]/10 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2 z-50">
+            <div className={`absolute top-[calc(100%+0.5rem)] left-0 w-48 bg-bp-surface border border-[#141619]/10 rounded-xl shadow-2xl flex flex-col p-2 z-50 transition-all duration-300 ${
+              openDropdown === "company"
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 translate-y-2 pointer-events-none"
+            }`}>
               <Link to="/careers"   onClick={nav("/careers")}   className={dropItem}>Careers</Link>
               <Link to="/insights"  onClick={nav("/insights")}  className={dropItem}>Insights</Link>
               <Link to="/investors" onClick={nav("/investors")} className={dropItem}>Investors</Link>
